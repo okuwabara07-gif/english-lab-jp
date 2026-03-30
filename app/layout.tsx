@@ -2,41 +2,32 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: { default: '英語LAB', template: '%s | 英語LAB' },
-  description: '英語学習の効率的な方法とおすすめ教材・アプリを紹介',
-  verification: { google: 'xpdiFRYHloMJxfhCT-IMD08p5na4v9WUqvPY9OrDsHs' },
+  title: '英語LAB | K-Beauty Portal',
+  description: '英語学習・TOEIC・英会話の最新情報',
+  openGraph: {
+    title: '英語LAB',
+    description: '英語学習・TOEIC・英会話の最新情報',
+    url: 'https://english-lab-jp.vercel.app',
+    siteName: 'K-Beauty Portal',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '英語LAB',
+    description: '英語学習・TOEIC・英会話の最新情報',
+    site: '@beauty_note_j',
+    creator: '@beauty_note_j',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=DM+Sans:wght@400;600;800&display=swap" rel="stylesheet" />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3460729726810386" crossOrigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
       </head>
-      <body>
-        <header className="site-header">
-          <div className="header-inner">
-            <a href="/" className="site-logo">
-              <span className="logo-mark">🗣️</span>
-              <span className="logo-text">英語LAB</span>
-            </a>
-            <nav className="site-nav">
-              <a href="/">ホーム</a>
-              <a href="/blog">記事一覧</a>
-            </nav>
-          </div>
-        </header>
-        <main>{children}</main>
-        <footer className="site-footer">
-          <div className="footer-inner">
-            <p>© 2025 英語LAB</p>
-            <p className="footer-note">本サイトはアフィリエイト広告を含みます</p>
-          </div>
-        </footer>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
