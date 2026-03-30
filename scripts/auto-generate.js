@@ -7,8 +7,9 @@ const AMAZON_TRACKING_ID = process.env.AMAZON_TRACKING_ID || 'haircolorab22-22';
 const RAKUTEN_AFFILIATE_ID = process.env.RAKUTEN_AFFILIATE_ID || '5253b9ed.08f9d938.5253b9ee.e71aefe8';
 const MOSHIMO_ID = '1184522';
 
-const KEYWORDS = ["英語教材", "英語参考書", "TOEIC問題集", "英会話テキスト", "英語アプリ"];
 const SITE_NAME = '英語LAB';
+const TOPIC = '英語学習・TOEIC・英会話';
+const CRITERIA = '効果・続けやすさ・コスパ・サポート・口コミ';
 
 function moshimoAmazonLink(keyword) {
   const searchUrl = encodeURIComponent(`https://www.amazon.co.jp/s?k=${encodeURIComponent(keyword)}&tag=${AMAZON_TRACKING_ID}`);
@@ -16,7 +17,7 @@ function moshimoAmazonLink(keyword) {
 }
 
 function moshimoRakutenLink(keyword) {
-  const searchUrl = encodeURIComponent(`https://search.rakuten.co.jp/search/mall/${encodeURIComponent(keyword)}/?f=1&hd=1&af=${RAKUTEN_AFFILIATE_ID}`);
+  const searchUrl = encodeURIComponent(`https://search.rakuten.co.jp/search/mall/${encodeURIComponent(keyword)}/?f=1&af=${RAKUTEN_AFFILIATE_ID}`);
   return `https://af.moshimo.com/af/c/click?a_id=${MOSHIMO_ID}&p_id=54&pc_id=54&pl_id=616&url=${searchUrl}`;
 }
 
@@ -36,34 +37,126 @@ function request(options, body) {
 async function generateArticle(keyword) {
   const amazonLink = moshimoAmazonLink(keyword);
   const rakutenLink = moshimoRakutenLink(keyword);
+  const year = new Date().getFullYear();
 
-  const prompt = `「${keyword}」について、日本語で800文字以上のブログ記事を書いてください。
+  const prompt = `あなたはプロのレビューライターです。「${keyword}」について、マイベスト・価格.comのような高品質な比較記事を日本語で書いてください。
 
 以下の形式でMDXファイルとして出力してください：
 
 ---
-title: "【2026年最新】${keyword}のおすすめ完全ガイド"
+title: "【${year}年最新】${keyword}おすすめランキングTOP5｜専門家が徹底比較"
 date: "${new Date().toISOString().split('T')[0]}"
-description: "${keyword}について徹底解説。選び方のポイントとおすすめ商品を紹介します。"
+description: "${keyword}のおすすめ商品をランキング形式で徹底比較。${CRITERIA}の観点から選び方のポイントも解説します。"
 ---
 
-記事本文（見出しh2・h3を使って構造化してください）
+## ${keyword}の選び方｜重要な5つのポイント
 
-記事の最後に必ず以下のアフィリエイトリンクセクションを含めてください：
+（選び方の解説を300文字以上で書く）
 
-## おすすめ商品を探す
+## 評価基準について
+
+本記事では以下の基準で各商品を評価しています：
+- ${CRITERIA.split('・').join('\n- ')}
+
+各項目を5段階（★1〜★5）で評価しています。
+
+## ${keyword}おすすめランキングTOP5
+
+### 第1位：[商品名A]
+**総合評価：★★★★★（5.0）**
+
+| 評価項目 | スコア |
+|---------|--------|
+${CRITERIA.split('・').map(c => `| ${c} | ★★★★★ |`).join('\n')}
+
+**おすすめポイント**
+（200文字以上で詳しく解説）
+
+**こんな人におすすめ**
+- ○○を重視する人
+- ○○に悩んでいる人
+- 予算○○円以内で探している人
+
+---
+
+### 第2位：[商品名B]
+**総合評価：★★★★☆（4.5）**
+
+| 評価項目 | スコア |
+|---------|--------|
+${CRITERIA.split('・').map(c => `| ${c} | ★★★★☆ |`).join('\n')}
+
+**おすすめポイント**
+（200文字以上で詳しく解説）
+
+**こんな人におすすめ**
+- ○○を重視する人
+- ○○に悩んでいる人
+
+---
+
+### 第3位：[商品名C]
+**総合評価：★★★★☆（4.0）**
+
+| 評価項目 | スコア |
+|---------|--------|
+${CRITERIA.split('・').map(c => `| ${c} | ★★★★☆ |`).join('\n')}
+
+**おすすめポイント**
+（200文字以上で詳しく解説）
+
+---
+
+### 第4位：[商品名D]
+**総合評価：★★★☆☆（3.5）**
+
+**おすすめポイント**（100文字以上）
+
+---
+
+### 第5位：[商品名E]
+**総合評価：★★★☆☆（3.0）**
+
+**おすすめポイント**（100文字以上）
+
+---
+
+## 商品比較表
+
+| 商品名 | 総合評価 | 価格帯 | ${CRITERIA.split('・').join(' | ')} | こんな人向け |
+|--------|---------|--------|${CRITERIA.split('・').map(() => '------').join('|')}|------|
+| 商品A | ★★★★★ | ¥○○○○ | ${CRITERIA.split('・').map(() => '★★★★★').join(' | ')} | ○○な人 |
+| 商品B | ★★★★☆ | ¥○○○○ | ${CRITERIA.split('・').map(() => '★★★★☆').join(' | ')} | ○○な人 |
+| 商品C | ★★★★☆ | ¥○○○○ | ${CRITERIA.split('・').map(() => '★★★☆☆').join(' | ')} | ○○な人 |
+
+## タイプ別おすすめ商品
+
+**初心者・コスパ重視の人には**
+→ [商品名]がおすすめ。理由：（100文字）
+
+**品質・効果重視の人には**
+→ [商品名]がおすすめ。理由：（100文字）
+
+**プレゼントにおすすめ**
+→ [商品名]がおすすめ。理由：（100文字）
+
+## まとめ
+
+（200文字以上のまとめ）
+
+## おすすめ商品を購入する
 
 ### Amazonで探す
 [${keyword}をAmazonで見る](${amazonLink})
 
-### 楽天市場で探す  
+### 楽天市場で探す
 [${keyword}を楽天で見る](${rakutenLink})
 
 ※本記事はアフィリエイト広告を含みます。`;
 
   const body = JSON.stringify({
     model: 'claude-sonnet-4-20250514',
-    max_tokens: 2000,
+    max_tokens: 3000,
     messages: [{ role: 'user', content: prompt }]
   });
 
@@ -80,6 +173,7 @@ description: "${keyword}について徹底解説。選び方のポイントと�
   }, body);
 
   const data = JSON.parse(res.body);
+  if (!data.content || !data.content[0]) throw new Error('API error: ' + res.body.slice(0, 200));
   return data.content[0].text;
 }
 
@@ -87,18 +181,24 @@ async function main() {
   const blogDir = path.join(process.cwd(), 'content/blog');
   if (!fs.existsSync(blogDir)) fs.mkdirSync(blogDir, { recursive: true });
 
-  const count = Math.min(5, KEYWORDS.length);
-  console.log(`Generating ${count} articles for ${SITE_NAME}...`);
+  const keywords = [
+    '英語学習おすすめ',
+    '英語学習ランキング',
+    '英語学習比較',
+    '英語学習選び方',
+    '英語学習人気',
+  ];
 
-  for (let i = 0; i < count; i++) {
-    const keyword = KEYWORDS[i % KEYWORDS.length];
+  console.log(`Generating comparison articles for ${SITE_NAME}...`);
+
+  for (const keyword of keywords.slice(0, 3)) {
     try {
       console.log(`Generating: ${keyword}`);
       const content = await generateArticle(keyword);
       const filename = `${Date.now()}-${keyword.replace(/[^a-zA-Z0-9぀-鿿]/g, '-')}.mdx`;
       fs.writeFileSync(path.join(blogDir, filename), content);
       console.log(`✅ Saved: ${filename}`);
-      await new Promise(r => setTimeout(r, 2000));
+      await new Promise(r => setTimeout(r, 3000));
     } catch (e) {
       console.error(`Error: ${keyword}`, e.message);
     }
