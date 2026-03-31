@@ -1,2 +1,3 @@
 # english-lab-jp
-英語LAB
+
+Updated: 2026-04-01
