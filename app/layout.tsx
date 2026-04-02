@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { getAllPosts } from '@/lib/posts'
 
 export const metadata: Metadata = {
   title: '英語Lab',
@@ -23,8 +22,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-SVQXY5C3PW"></script>
-      <script dangerouslySetInnerHTML={{__html:`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SVQXY5C3PW');`}} />
+      <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SVQXY5C3PW"></script>
+        <script dangerouslySetInnerHTML={{__html:`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SVQXY5C3PW');`}} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{__html:`{"@context": "https://schema.org", "@type": "WebSite", "name": "英語Lab", "description": "英語学習・TOEIC対策情報", "url": "https://english-lab-jp.vercel.app", "publisher": {"@type": "Organization", "name": "AOKAE合同会社", "url": "https://colorpass-web.vercel.app"}, "potentialAction": {"@type": "SearchAction", "target": "https://english-lab-jp.vercel.app/blog/{search_term_string}", "query-input": "required name=search_term_string"}}`}} />
+      </head>
       <body>{children}</body>
     </html>
   )
