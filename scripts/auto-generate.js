@@ -58,8 +58,8 @@ async function main() {
   var existing = fs.readdirSync(blogDir).filter(function(f){ return f.endsWith('.md')||f.endsWith('.mdx'); });
   var count = existing.length;
   console.log('現在の記事数: ' + count);
-  if (count >= 50) { console.log('50記事達成済み'); return; }
-  var needed = Math.min(50 - count, 5);
+  if (count >= 100) { console.log('50記事達成済み'); return; }
+  var needed = Math.min(100 - count, 9);
   var today = new Date().toISOString().slice(0,10);
   for (var i = 0; i < needed; i++) {
     var kw = KEYWORDS[Math.floor(Math.random() * KEYWORDS.length)];
