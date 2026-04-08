@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://english-lab-jp.vercel.app/sitemap.xml
+Sitemap: https://okuwabara07-gif.github.io/english-lab-jp/sitemap.xml
