@@ -7,9 +7,9 @@ const AMAZON_TRACKING_ID = process.env.AMAZON_TRACKING_ID || 'haircolorab22-22';
 const RAKUTEN_AFFILIATE_ID = process.env.RAKUTEN_AFFILIATE_ID || '5253b9ed.08f9d938.5253b9ee.e71aefe8';
 const MOSHIMO_ID = '1184522';
 
-const SITE_NAME = 'english lab';
-const TOPIC = 'ヘアカラー・白髪染め・セルフカラー';
-const CRITERIA = '染まりやすさ・色持ち・ダメージ・コスパ・使いやすさ';
+const SITE_NAME = '英語LAB';
+const TOPIC = '英語学習・英会話・TOEIC対策';
+const CRITERIA = '効果・続けやすさ・コスパ・サポート・口コミ';
 
 function moshimoAmazonLink(keyword) {
   const searchUrl = encodeURIComponent(`https://www.amazon.co.jp/s?k=${encodeURIComponent(keyword)}&tag=${AMAZON_TRACKING_ID}`);
