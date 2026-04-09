@@ -122,7 +122,7 @@ async function generateArticle(keyword) {
     ranking: `「${keyword}」について、訪問者が即座に購買行動を起こしやすい比較ランキング記事を書いてください。`,
   };
 
-  const prompt = \`あなたはCRO専門家でもあるプロのレビューライターです。
+  const prompt = `あなたはCRO専門家でもあるプロのレビューライターです。
 ${typePrompts[articleType] || typePrompts.ranking}
 
 サイト名：${SITE_NAME}
@@ -148,7 +148,7 @@ excerpt: "${keyword}について専門家が解説。選び方のポイントと
 [→ Amazonで${keyword}を探す](${amazonLink})
 [→ 楽天で${keyword}を探す](${rakutenLink})
 
-\`\`\`;
+```;
 
   const prompt = `あなたはCRO（コンバージョン率最適化）の専門家でもあるプロのレビューライターです。
 「${keyword}」について、訪問者が即座に購買行動を起こしやすい、マイベスト・価格.com級の高品質な比較記事を日本語で書いてください。
@@ -349,7 +349,7 @@ async function main() {
 
   
   const keywords = getKeywords();
-  console.log(\`Generating \${keywords.length} articles for \${SITE_NAME}...\`);
+  console.log(`Generating \${keywords.length} articles for \${SITE_NAME}...`);
 
   for (const keyword of keywords) {
 .slice(0, 30)) {
